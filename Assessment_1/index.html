@@ -4,13 +4,29 @@
 <title>Assessment 1</title>
 <link rel="stylesheet" type="text/css" href="site.css"/>
 <script src="image-mapper.js" ></script>
+<script>
+    var displayPoints = [];
+    var tempObj = {};
+    window.onload = function(){
+        //dummy();
+        function printMousePos(event) {
+            console.log("clientX : ", event.clientX);
+            
+            }
+
+            document.addEventListener("save", printMousePos);
+    }
+</script>
 </head>
 <body>
     <div class="container">
         <input id="uploadImage" type="file" onchange="uploadImage(event)" accept='image/*'><br>
         <div class = "image">
-            <div style="width: 50%; float:left">
-                <img  id="img_id" src="" alt="Image Not Found" style="display: none;">
+            <div class="tooltip" style="width: 50%; float:left">
+                <img  id="img_id" src="" alt="Image Not Found" onclick="getCoordinates(event)" style="display: none;">
+                <span class="tooltiptext" id="id_tooltip"></span>
+                <div id = "des_tooltips">
+                </div>
              </div>
              <div style="width: 40%; float:left">
                 <div id="display_block" style="display: none;">
@@ -18,8 +34,22 @@
                     <p id="dimensions"></p>
                     <p id="mimetype"></p>
                  </div>
+                 <div class="table" id = "data_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>X Pos</th>
+                            <th>Y Pos</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody id="data_tbody">
+                        </tbody>
+                    </table>
+                 </div>
             </div>
         </div>
+        
     </div>
 </body>
 </html>

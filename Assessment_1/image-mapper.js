@@ -1,3 +1,4 @@
+
 function uploadImage(e){
     let files=e.target.files;
     let mimeType=files[0].type; // 
@@ -28,6 +29,63 @@ function setImageDescription(imgName,mimeType,dimensions){
     document.getElementById("display_block").style.setProperty("display","block");
 }
 
-function GetCoordinates(e){
+function getCoordinates(event){
+    tempObj = {};
+    let x = event.clientX;
+    let y = event.clientY;
+    tempObj = {"x": x,"y": y,"description":""};
+    showToolTop(x,y);
+}
+
+function showToolTop(x,y){
+    let tooltip = document.getElementById("id_tooltip");
+    console.log("tooltip : ", tooltip);
+    tooltip.innerHTML = '<div id="tooltip_div">'+'<input type="text" id= "input_description" /><br>' + 
+                        '<button id="save" style = "none" type="button" onclick = "getdescription()">save</button>' +
+                        '<button id="cancel" style = "none" type="button" onclick = "onCancel()">cancel</button>'+
+                        '</div>';
+    tooltip.style.left = (x) + "px" ;
+    tooltip.style.top = (y) + "px" ;  
+}
+function getdescription(){
+    description = document.getElementById("input_description").value;
+    document.getElementById("tooltip_div").style.display = "none";
+    tempObj.description = description;
+    displayPoints.push(tempObj);
+    addDataPointsTable(displayPoints);
+}
+function onCancel(){
+    document.getElementById("tooltip_div").style.display = "none";
+}
+
+function addDataPointsTable(displayPoints){
+    console.log("displayPoints : ", displayPoints);
+    let tbody = document.getElementById("data_tbody");
+    let currentRecordNum = displayPoints.length -1 ;
+
+    let tr = document.createElement("tr");
+    tr.setAttribute("class","data_tr")
     
+    let td = document.createElement("td");
+    td.setAttribute("class","td_fragments");
+    td.innerHTML = displayPoints[currentRecordNum].x;
+    tr.appendChild(td);
+
+    let td1 = document.createElement("td");
+    td1.setAttribute("class","td_fragments");
+    td1.innerHTML = displayPoints[currentRecordNum].y;
+    tr.appendChild(td1);
+
+    let td2 = document.createElement("td");
+    td2.setAttribute("class","td_fragments");
+    td2.innerHTML = displayPoints[currentRecordNum].description;
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
+
+    let des_tooltips = document.getElementById("des_tooltips");
+    let tooltip = document.createElement("span");
+    tooltip.innerHTML =  displayPoints[currentRecordNum].description;
+    tooltip.style.left = displayPoints[currentRecordNum].x + "px" ;
+    tooltip.style.top = displayPoints[currentRecordNum].y + "px" ;  
+    des_tooltips.appendChild(tooltip);
 }
