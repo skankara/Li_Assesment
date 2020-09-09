@@ -6,6 +6,20 @@
 <script src="image-mapper.js" ></script>
 </head>
 <body>
-
+    <div class="container">
+        <input id="uploadImage" type="file" onchange="uploadImage(event)" accept='image/*'><br>
+        <div class = "image">
+            <div style="width: 50%; float:left">
+                <img  id="img_id" src="" alt="Image Not Found" style="display: none;">
+             </div>
+             <div style="width: 40%; float:left">
+                <div id="display_block" style="display: none;">
+                    <p id="imagename"></p>
+                    <p id="dimensions"></p>
+                    <p id="mimetype"></p>
+                 </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,21 @@
+.container {
+    text-align: center;
+}
+#uploadImage{
+    text-align: center;
+}
+#img_id {
+    max-width: 100%;
+    max-height: 90vh;
+    margin: auto;
+}
+#display_block {
+    margin: auto;
+    margin-top: 5px;
+    width: 60%;
+    border: 3px solid black;
+    padding: 5px;
+}
+#display_block p{
+    text-align: left;
+}
