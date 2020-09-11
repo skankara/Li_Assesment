@@ -9,6 +9,14 @@
     max-height: 90vh;
     margin: auto;
 }
+#canvas{
+    /* margin:auto;
+    position: relative; */
+    position: relative;
+    max-width: 100%;
+    max-height: 90vh;
+    margin: auto;
+}
 #display_block {
     margin: auto;
     margin-top: 5px;
@@ -49,8 +57,8 @@ table{
     position: absolute;
 }
 #des_tooltips{
-    position: absolute;
-    /* z-index: 2; */
+    position: relative;
+    z-index: 1;
 }
 
 .dot {
