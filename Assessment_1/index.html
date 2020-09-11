@@ -7,34 +7,27 @@
 <script>
     var displayPoints = [];
     var tempObj = {};
-    window.onload = function(){
-        //dummy();
-        function printMousePos(event) {
-            console.log("clientX : ", event.clientX);
-            
-            }
 
-            document.addEventListener("save", printMousePos);
-    }
 </script>
 </head>
 <body>
     <div class="container">
-        <input id="uploadImage" type="file" onchange="uploadImage(event)" accept='image/*'><br>
+        <input id="uploadImage" type="file" onchange="uploadImage(event)" accept='image/*'>
         <div class = "image">
             <div class="tooltip" style="width: 50%; float:left">
-                <img  id="img_id" src="" alt="Image Not Found" onclick="getCoordinates(event)" style="display: none;">
-                <span class="tooltiptext" id="id_tooltip"></span>
-                <div id = "des_tooltips">
+                <div class="parent_image">
+                    <img  id="img_id" src="" alt="Image Not Found" onclick="getCoordinates(event)" style="display: none;"> 
+                    <span class="tooltiptext" id="id_tooltip"></span>
+                    <div id = "des_tooltips"></div>
                 </div>
-             </div>
+            </div>
              <div style="width: 40%; float:left">
                 <div id="display_block" style="display: none;">
                     <p id="imagename"></p>
                     <p id="dimensions"></p>
                     <p id="mimetype"></p>
                  </div>
-                 <div class="table" id = "data_table">
+                 <div class="table" id = "data_table" style="display: none;">
                     <table>
                         <thead>
                         <tr>

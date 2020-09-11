@@ -15,46 +15,50 @@
     width: 60%;
     border: 3px solid black;
     padding: 5px;
+    
 }
-
 #display_block p{
     text-align: left;
-    
 }
 table,th,td{
     border: 1px solid black;
   }
 table{
+    position:relative;
     margin: auto;
-    margin-top: 30px;
-    width: 60%;
+    width: 100%;
     padding: 5px;
     border-collapse: collapse;
+    margin-bottom: 30px ;
+}
+.table{
+    /* overflow: scroll; */
+    /* height: 500px; */
+    margin-top: 30px;
 }
 
 .tooltip{
+    margin:auto;
+    /* margin-top:10px; */
     position: relative;
-    display: inline-block;
-  }
-  
-  .tooltip .tooltiptext{
-    width: 120px;
-    color:black;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
+}
+.parent_image{
+    position: relative;
+}
+.tooltiptext{
     position: absolute;
-    z-index: 1;
-    opacity: 1;
-    transition: opacity;
-  }
-  
-  .tooltip:hover .tooltiptext{
-    visibility: visible;
-    opacity: 1;
-  }
+}
+#des_tooltips{
+    position: absolute;
+    /* z-index: 2; */
+}
 
-  #tooltip_div{
-      background-color: cadetblue;
+.dot {
+    height: 15px;
+    width: 15px;
+    color: red;
+    border-radius: 100%;
+    display: inline-block;
+    opacity:1;
+    z-index: 1;
   }
-  
