@@ -88,13 +88,13 @@ function getdescription(){
         ctx2.fillStyle = "#6eddaa";
         let tempWid = ctx2.measureText(description).width;
         console.log("tempWid : ", tempWid);
-        ctx2.fillRect(tempObj.x,tempObj.y,2*tempWid,20);
+        ctx2.fillRect(tempObj.x+5,tempObj.y,2*tempWid,20);
 
         
         let ctx = cnvs1.getContext("2d");
         ctx.font = "15px Arial";
         ctx.fillStyle = "black";
-        ctx.fillText(description, tempObj.x, tempObj.y+15);
+        ctx.fillText(description, tempObj.x+5, tempObj.y+15);
 
         
 
