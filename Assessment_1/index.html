@@ -1,57 +1,53 @@
 <!DOCTYPE html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 <title>Assessment 1</title>
 <link rel="stylesheet" type="text/css" href="site.css"/>
 <script src="image-mapper.js" ></script>
 <script>
     var displayPoints = [];
     var tempObj = {};
-    // window.addEventListener("resize", myScript);
-    // function myScript(){
-    //     let width = document.getElementById("img_id").getAttribute("width"); 
-    //     console.log("width : ", width);
-    // }
 </script>
-
 </head>
 <body>
     <div class="container">
-        <input id="uploadImage" type="file" onchange="uploadImage(event)" accept='image/*'>
-        <div class = "image">
-            <div class="tooltip" style="width: 50%; float:left">
-                <div class="parent_image" >
-                    <div class="image_div" ">
-                        <img  id="img_id" src="" alt="Image Not Found"  style="display: none;"> 
-                        <canvas id='myCanvas' onclick="getCoordinates(event)">
-                            <!-- <div id = "des_tooltips"></div> -->
-                        </canvas>
-                    </div>
-                    <span class="tooltiptext" id="id_tooltip"></span> 
+        <div>   
+            <input id="uploadImage" type="file" onchange="uploadImage(event)" accept='image/*'>
+        </div>
+        <div class = "leftwing" style="width: 50%; float:left">
+            <!-- <img  id="img_id" src="human-skeleton.jpg" alt="Image Not Found"  >  -->
+            <svg id="id_svg"  onclick="getCoordinates(event)" xmlns="http://www.w3.org/2000/svg">
+                <div id="tooltip">
                 </div>
-            </div>
-             <div style="width: 40%; float:left">
-                <div id="display_block" style="display: none;">
-                    <p id="imagename"></p>
-                    <p id="dimensions"></p>
-                    <p id="mimetype"></p>
-                 </div>
-                 <div class="table" id = "data_table" style="display: none;">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>X Pos</th>
-                            <th>Y Pos</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody id="data_tbody">
-                        </tbody>
-                    </table>
-                 </div>
+                <div id="textdata">
+                </div>
+                
+            </svg> 
+            <div id = "circlediv">
+                    
             </div>
         </div>
-        
+        <div class = "rightwing" style="width: 40%; float:right">
+            <div id="display_block" style="display: none;">
+                <p id="imagename"></p>
+                <p id="dimensions"></p>
+                <p id="mimetype"></p>
+             </div>
+             <div class="table" id = "data_table" style="display: none;">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>X Pos</th>
+                        <th>Y Pos</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody id="data_tbody">
+                    </tbody>
+                </table>
+             </div>
+        </div>
     </div>
+    
 </body>
 </html>

@@ -1,35 +1,74 @@
+/* svg{
+    width:100%;
+    max-height: 90vh;
+    margin: auto;
+    background-color: bisque;
+    position: relative;
+}
+img{
+    position: absolute;
+    max-width: 100%;
+    max-height: 90vh;
+    margin: auto;
+} */
+.leftwing{
+    padding-top: 40px;
+}
 .container {
     text-align: center;
 }
-#uploadImage{
-    text-align: center;
-}
-#img_id {
+.leftwing svg {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    width: 50%;
+    height: 90vh;
+    z-index: 0;
+    opacity: 1;
+    margin: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+.leftwing img { /* <= optional, for responsiveness */
+    display: block;
     max-width: 100%;
     max-height: 90vh;
     margin: auto;
-}
+    opacity: 1;
+ }
+ 
+ .image{
+    z-index: 6;
+ }
+ .cir{
+    position: absolute;
+    border-radius: 25px;
+    background: red;
+    z-index: 3;
 
-#canvas{
-    /* margin:auto;
-    position: relative; */
+ }
+ #tooltip{
+     background-color: blueviolet;
+     position: absolute;
+     z-index: 2;
+ }
+ #textdata p{
+    position: absolute;
+    background-color: rgb(138, 148, 138);
+    text-align:center;
+    /* margin:auto; */
+    padding-right: 5px;
+    padding-left: 5px;
+ }
+ 
+ #circlediv, circle{
     position: relative;
-    max-width: 100%;
-    max-height: 90vh;
-    margin: auto;
+     z-index: 6;
+     fill: red;
+     opacity: 1;
+
 }
-#display_block {
-    margin: auto;
-    margin-top: 5px;
-    width: 60%;
-    border: 3px solid black;
-    padding: 5px;
-    
-}
-#display_block p{
-    text-align: left;
-}
-table,th,td{
+ table,th,td{
     border: 1px solid black;
   }
 table{
@@ -39,35 +78,14 @@ table{
     padding: 5px;
     border-collapse: collapse;
     margin-bottom: 30px ;
+    
 }
 .table{
     /* overflow: scroll; */
     /* height: 500px; */
     margin-top: 30px;
+    max-height: 75vh;
+    overflow: auto;
+    
 }
-
-.tooltip{
-    margin:auto;
-    /* margin-top:10px; */
-    position: relative;
-}
-.parent_image{
-    position: relative;
-}
-.tooltiptext{
-    position: absolute;
-}
-#des_tooltips{
-    position: relative;
-    z-index: 1;
-}
-
-.dot {
-    height: 15px;
-    width: 15px;
-    color: red;
-    border-radius: 100%;
-    display: inline-block;
-    opacity:1;
-    z-index: 1;
-  }
+ 

@@ -1,7 +1,3 @@
-
-var width1;
-var height1
-
 function uploadImage(e){
     let files=e.target.files;
     let mimeType=files[0].type; // 
@@ -10,20 +6,13 @@ function uploadImage(e){
     console.log("imgName : ", imgName);
     if(mimeType == "image/jpeg")
     {
-        let img_element = document.getElementById("img_id");
-        img_element.setAttribute("src",imgName);
-        img_element.style.setProperty("display","block");
-        img_element.onload = function(){
-            let height = img_element.height;
-            let width = img_element.width;
-            width1 = width;
-            height1= height;
-            console.log("height : ", height);
-            console.log("width : ", width);
-            let dimensions = width+"*"+height;
-            setImageDescription(imgName,mimeType,dimensions);
-            setCanvas();
-          }
+        let svg = document.getElementById("id_svg");
+        let styleText = "background-image : url("+ imgName + ");";
+        svg.setAttribute("style",styleText);
+        let height = Math.round(svg.getBoundingClientRect().height);
+        let width = Math.round(svg.getBoundingClientRect().width);
+        let dimensions = width+"*"+height;
+        setImageDescription(imgName,mimeType,dimensions);
     }
 }
 
@@ -37,76 +26,39 @@ function setImageDescription(imgName,mimeType,dimensions){
 
 function getCoordinates(event){
 
-    let cnvs = document.getElementById("myCanvas");
-    let rect = cnvs.getBoundingClientRect();
-     let x = event.clientX //- rect.left; // x == the location of the click in the document - the location (relative to the left) of the canvas in the document
-     let y = event.clientY //- rect.top; // y == the location of the click in the document - the location (relative to the top) of the canvas in the document
-     
-     let posx = x - rect.left;
-    let posy = y - rect.top;
-
-    showToolTop(x,y);
-    tempObj = {"x":posx,"y":posy,"description":""};
+     let x = event.clientX 
+     let y = event.clientY 
     
+    tempObj = {"x":x,"y":y,"description":""};
+    console.log(tempObj);
+    showToolTop(x,y);
 }
-function setCanvas(){
-    let img = document.getElementById("img_id");
-    let cnvs = document.getElementById("myCanvas");
-    cnvs.style.position = "absolute";
-    cnvs.style.left = img.offsetLeft + "px";
-    cnvs.style.top = img.offsetTop + "px";
-    cnvs.setAttribute("width",width1);
-    cnvs.setAttribute("height",height1);
-}
-
 function showToolTop(x,y){
-    let tooltip = document.getElementById("id_tooltip");
-    console.log("tooltip : ", tooltip);
+    let tooltip = document.getElementById("tooltip");
+    
     tooltip.innerHTML = '<div id="tooltip_div">'+'<input type="text" id= "input_description" /><br>' + 
                         '<button id="save" style = "none" type="button" onclick = "getdescription()">save</button>' +
                         '<button id="cancel" style = "none" type="button" onclick = "onCancel()">cancel</button>'+
                         '</div>';
+    
     tooltip.style.left = (x) + "px" ;
     tooltip.style.top = (y) + "px" ;  
 }
 function getdescription(){
     description = document.getElementById("input_description").value;
     document.getElementById("tooltip_div").style.display = "none";
-    let cnvs = document.getElementById("myCanvas");
     console.log("des : ", description);
     if(description != "")
     {
-        let context = cnvs.getContext("2d");
-        context.fillStyle = "red";
-        context.beginPath();
-        context.arc(tempObj.x, tempObj.y, 5, 0, 2 * Math.PI);
-        // context.fillStyle = "red";
-        context.fill();
-
-        let cnvs1 = document.getElementById("myCanvas");
-        let ctx2 = cnvs1.getContext("2d");
-        ctx2.fillStyle = "#6eddaa";
-        let tempWid = ctx2.measureText(description).width;
-        console.log("tempWid : ", tempWid);
-        ctx2.fillRect(tempObj.x+5,tempObj.y,2*tempWid,20);
-
-        
-        let ctx = cnvs1.getContext("2d");
-        ctx.font = "15px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText(description, tempObj.x+5, tempObj.y+15);
-
-        
-
         tempObj.description = description;
         displayPoints.push(tempObj);
         addDataPointsTable(displayPoints);
+        AddCircle();
     }
-    
     document.getElementById("tooltip_div").remove();
 }
 function onCancel(){
-    document.getElementById("tooltip_div").style.display = "none";
+    document.getElementById("tooltip_div").remove();;
 }
 
 function addDataPointsTable(displayPoints){
@@ -114,7 +66,7 @@ function addDataPointsTable(displayPoints){
     console.log("displayPoints : ", displayPoints);
     let tbody = document.getElementById("data_tbody");
     let currentRecordNum = displayPoints.length -1 ;
-    // for(let i=0;i<150;i++)
+    // for(let i=0;i<150;i++) // Testing scroll bar
     // {
         let tr = document.createElement("tr");
         tr.setAttribute("class","data_tr")
@@ -138,12 +90,47 @@ function addDataPointsTable(displayPoints){
     
 }
 
-function AddCircle(displayPoints){
-    let des_tooltips = document.getElementById("des_tooltips");
+function AddCircle(){
     let currentRecordNum = displayPoints.length -1 ;
-    let span = document.createElement("span");
-    span.style.left = displayPoints[currentRecordNum].x + "px" ;
-    span.style.top = displayPoints[currentRecordNum].y + "px" ;
-    span.setAttribute("class","dot");
-    des_tooltips.appendChild(span);
+    let svg = document.getElementById("id_svg");
+    var svgns = "http://www.w3.org/2000/svg";
+    let div = document.createElement("div");
+   // div.setAttribute("class","circle");
+    let x = displayPoints[currentRecordNum].x;
+    let y = displayPoints[currentRecordNum].y - 40 ; // Removing the top padding value
+
+    var circle = document.createElementNS(svgns, 'circle');
+    circle.setAttributeNS(null, 'cx', x + "px");
+    circle.setAttributeNS(null, 'cy', y + "px");
+    circle.setAttributeNS(null, 'r', 5);
+    circle.setAttributeNS(null, 'style', 'fill: "#c52907"; stroke: black; stroke-width: 3px;' );
+    svg.appendChild(circle);
+
+    circle.addEventListener("mouseover", function( event ) {   
+        console.log("on Mouse over");
+
+        let textdata = document.getElementById("textdata");
+        let p = document.createElement("p");
+        p.setAttribute("id","p_id")
+        let elem = "<p>" + displayPoints[currentRecordNum].description + "</p>" ;
+        p.innerHTML = elem;
+        p.style.left = x + 15 + "px";
+        p.style.top = y + 10 + "px"; 
+        textdata.appendChild(p);
+      });
+    circle.addEventListener("mouseout", function( event ) {   
+        console.log("on Mouse out");
+        document.getElementById("p_id").remove();
+      
+      });
+      addingCircles(x,y)
+}
+
+function addingCircles(x,y){
+    let circleDiv = document.getElementById("circlediv");
+   let div =  document.createElement("div");
+   div.setAttribute("class","cir");
+   div.setAttribute("width",x+"px");
+   div.setAttribute("height",y+"px");
+   circleDiv.appendChild(div);
 }
