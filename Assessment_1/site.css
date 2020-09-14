@@ -1,91 +1,50 @@
-/* svg{
-    width:100%;
-    max-height: 90vh;
-    margin: auto;
-    background-color: bisque;
-    position: relative;
-}
-img{
-    position: absolute;
-    max-width: 100%;
-    max-height: 90vh;
-    margin: auto;
-} */
-.leftwing{
-    padding-top: 40px;
-}
 .container {
-    text-align: center;
-}
-.leftwing svg {
-    position: absolute;
-    top: 42px;
-    left: 0;
-    width: 50%;
-    height: 90vh;
-    z-index: 0;
-    opacity: 1;
-    margin: auto;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-.leftwing img { /* <= optional, for responsiveness */
-    display: block;
-    max-width: 100%;
-    max-height: 90vh;
-    margin: auto;
-    opacity: 1;
- }
- 
- .image{
-    z-index: 6;
- }
- .cir{
-    position: absolute;
-    border-radius: 25px;
-    background: red;
-    z-index: 3;
-
- }
- #tooltip{
-     background-color: blueviolet;
-     position: absolute;
-     z-index: 2;
- }
- #textdata p{
-    position: absolute;
-    background-color: rgb(138, 148, 138);
-    text-align:center;
-    /* margin:auto; */
-    padding-right: 5px;
-    padding-left: 5px;
- }
- 
- #circlediv, circle{
     position: relative;
-     z-index: 6;
-     fill: red;
-     opacity: 1;
-
-}
- table,th,td{
-    border: 1px solid black;
+    text-align: center;
+    color: black;
   }
-table{
-    position:relative;
-    margin: auto;
-    width: 100%;
-    padding: 5px;
-    border-collapse: collapse;
-    margin-bottom: 30px ;
-    
-}
-.table{
-    /* overflow: scroll; */
-    /* height: 500px; */
-    margin-top: 30px;
-    max-height: 75vh;
-    overflow: auto;
-    
-}
- 
+  
+  img{
+      max-width: 100%;
+      max-height: 90vh;
+  }
+  .circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 5px;
+      background: red;
+      position: absolute;
+   }
+  #tooltip{
+      position: absolute;
+      z-index: 9;
+  }
+  #tooltip_div{
+      background-color: coral;
+  }
+  #p_id{
+      position: absolute;
+  }
+  #p_id p{
+      background-color: rgb(138, 148, 138);
+      text-align:center;
+      padding-right: 5px;
+      padding-left: 5px;
+  }
+  table,th,td{
+      border: 1px solid black;
+    }
+  table{
+      position:relative;
+      margin: auto;
+      width: 100%;
+      padding: 5px;
+      border-collapse: collapse;
+      margin-bottom: 30px ;
+      
+  }
+  .table{
+      margin-top: 30px;
+      max-height: 75vh;
+      overflow: auto;
+  }

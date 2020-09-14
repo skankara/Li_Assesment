@@ -1,53 +1,40 @@
 <!DOCTYPE html>
+<html>
 <head>
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<title>Assessment 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="image-mapper.js"></script>
 <link rel="stylesheet" type="text/css" href="site.css"/>
-<script src="image-mapper.js" ></script>
-<script>
-    var displayPoints = [];
-    var tempObj = {};
-</script>
 </head>
 <body>
-    <div class="container">
-        <div>   
-            <input id="uploadImage" type="file" onchange="uploadImage(event)" accept='image/*'>
+<div class="container" id="container">
+  <div>
+    <input id="uploadImage" type="file" onchange="uploadImage(event)" accept='image/*'>
+  </div>
+  <div class = "leftwing" style="width: 50%; float:left" >
+    <img id="img_id" src="human-skeleton.jpg" alt="Snow" onclick="getCoordinates(event)" style="display: none;">
+    <div id="circlediv"></div>
+    <div id="tooltip"></div>
+  </div>
+  <div class = "rightwing" style="width: 40%; float:right">
+        <div id="display_block" style="display: none;">
+            <p id="imagename"></p>
+            <p id="dimensions"></p>
+            <p id="mimetype"></p>
         </div>
-        <div class = "leftwing" style="width: 50%; float:left">
-            <!-- <img  id="img_id" src="human-skeleton.jpg" alt="Image Not Found"  >  -->
-            <svg id="id_svg"  onclick="getCoordinates(event)" xmlns="http://www.w3.org/2000/svg">
-                <div id="tooltip">
-                </div>
-                <div id="textdata">
-                </div>
-                
-            </svg> 
-            <div id = "circlediv">
-                    
-            </div>
-        </div>
-        <div class = "rightwing" style="width: 40%; float:right">
-            <div id="display_block" style="display: none;">
-                <p id="imagename"></p>
-                <p id="dimensions"></p>
-                <p id="mimetype"></p>
-             </div>
-             <div class="table" id = "data_table" style="display: none;">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>X Pos</th>
-                        <th>Y Pos</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody id="data_tbody">
-                    </tbody>
-                </table>
-             </div>
+        <div class="table" id = "data_table" style="display: none;">
+            <table>
+                <thead>
+                <tr>
+                    <th>X Pos</th>
+                    <th>Y Pos</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody id="data_tbody">
+                </tbody>
+            </table>
         </div>
     </div>
-    
+</div>
 </body>
-</html>
+</html> 
