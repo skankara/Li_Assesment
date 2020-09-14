@@ -1,14 +1,11 @@
 function getData(){
     let ticker =   document.getElementById("ticker").value;
-    console.log("ticker : "+ticker);
     (async function f() {
         let url = "https://sandbox.iexapis.com/stable/stock/"+ticker+"/batch?types=quote,news,chart&range=1m&last=10&token=Tsk_4943518c25fd46cdb019fdbcf87c801a";
         let data = await (await fetch(url).catch(handleErr)).json();
         if (data.code && data.code == 400) {
           return;
         }
-        console.log(data);
-        //drawStockPlot(data.chart);
         drawSVG(data.chart);
       })();
 
@@ -144,6 +141,7 @@ converted_data.forEach((elem,i)=>{
     .style("color","red")
     .style("stroke","black")
     .on('mouseover', function(d) {
+        d3.selectAll(".tooltip").style("display","block")
         tooltip.transition()
                 .delay(30)
                 .duration(200)
@@ -182,7 +180,8 @@ converted_data.forEach((elem,i)=>{
                 .duration("200")
                 .attr("r", 3)
                 .style("opacity", 1);
-
+            
+            d3.selectAll(".tooltip").style("display","none")
         });
 })
 
