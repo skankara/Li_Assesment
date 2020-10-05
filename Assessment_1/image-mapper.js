@@ -1,13 +1,17 @@
-function uploadImage(e){
-    let files=e.target.files;
-    let mimeType=files[0].type; // 
-    let imgName=files[0].name;
-    if(mimeType == "image/jpeg")
+function uploadImage(event){
+    let file = event.target.files[0];
+    let img_url  = URL.createObjectURL(file);
+    let mimeType=file.type; 
+    let imgName=file.name;
+    let splitter = mimeType.split("/");
+    if(splitter[0] === 'image')
     {
+        console.log("1");
         let img_element = document.getElementById("img_id");
-        img_element.setAttribute("src",imgName);
+        img_element.setAttribute("src",img_url);
         img_element.style.setProperty("display","block");
         img_element.onload = function(){
+            console.log("2");
             let someEl = document.getElementById('img_id');
             const myObserver = new ResizeObserver(entries => {
                 entries.forEach(entry => {
