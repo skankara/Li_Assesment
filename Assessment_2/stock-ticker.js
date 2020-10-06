@@ -106,85 +106,64 @@ var lineGraph = svg.append("path")
                            .attr("fill", "none");
 
 let addHighAndLow = function(x,y,val){
-        
         svg.append("text").attr("x",x)
                         .attr("y",y)
                         .text(val)
                         .style("font-size","10px");
     }
-converted_data.forEach((elem,i)=>{
-    let g = svg.append("g").attr("id",("g_"+i));
-    console.log("elem : ", elem);
-    console.log("i : ", i);
 
-    if(data[i].high == max){
-       let  x = xScale(elem.date);
-        let y = yScale(elem.high)-15; // To show the data higher
-        let val = "High : " + max;
-        addHighAndLow(x,y,val)
-    }
-    if(data[i].low == low)
-    {
-        let x = xScale(elem.date);
-        let y = yScale(elem.high) + 15; // To show the data lower
-        let val = "Low: " + low;
-
-        addHighAndLow(x,y,val)
-    }
-
-    g.append("circle") // Enter is not working
-    .attr("cx", function() { return xScale(elem.date); })      
-    .attr("cy", function() { return yScale(elem.high); })    
-    .attr("r", 3)
-    .attr("class","point")
-    .style("opacity", 1)
-    .style("color","red")
-    .style("stroke","black")
-    .on('mouseover', function(d) {
-        d3.selectAll(".tooltip").style("display","block")
-        tooltip.transition()
-                .delay(30)
-                .duration(200)
-                .style("opacity", 1);
-            let tooltipData = "date:" + data[i].date + "<br>" +
-                                "open: "+ data[i].open + "<br>" +
-                                "high: " + data[i].high + "<br>" +
-                                "low: "+data[i].low + "<br>" + 
-                                "close: "+data[i].close + "<br>" ;
+    svg.append("g").selectAll("circle")
+        .data(converted_data)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d,i) { return xScale(d.date); })      
+        .attr("cy", function(d,i) { return yScale(d.high); })  
+        .attr("r", 3)
+        .attr("class","point")
+        .style("opacity", 1)
+        .style("color","red")
+        .style("stroke","black") 
+        .on('mouseover', function(d,i) {
+            d3.selectAll(".tooltip").style("display","block")
+            tooltip.transition()
+                    .delay(30)
+                    .duration(200)
+                    .style("opacity", 1);
+                let tooltipData = "date:" + data[i].date + "<br>" +
+                                    "open: "+ d.open + "<br>" +
+                                    "high: " + d.high + "<br>" +
+                                    "low: "+d.low + "<br>" + 
+                                    "close: "+d.close + "<br>" ;
+        
+                tooltip.html(tooltipData)
+                    .style("left", (d3.event.pageX + 25) + "px")
+                    .style("top", (d3.event.pageY) + "px")
+                    .style("font-size","14px");
+        
+                const selection = d3.select(this).raise();
+        
+                selection
+                    .transition()
+                    .delay("20")
+                    .duration("200")
+                    .attr("r", 6)
+                    .style("opacity", 1)
+                    .style("fill","#ed3700");
+            })
+            .on("mouseout", function(d) {      
+                tooltip.transition()        
+                .duration(100)      
+                .style("opacity", 0);  
     
-            tooltip.html(tooltipData)
-                .style("left", (d3.event.pageX + 25) + "px")
-                .style("top", (d3.event.pageY) + "px")
-                .style("font-size","14px");
+                const selection = d3.select(this);
     
-            const selection = d3.select(this).raise();
-    
-            selection
-                .transition()
-                .delay("20")
-                .duration("200")
-                .attr("r", 6)
-                .style("opacity", 1)
-                .style("fill","#ed3700");
-        })
-        .on("mouseout", function(d) {      
-            tooltip.transition()        
-            .duration(100)      
-            .style("opacity", 0);  
-
-            const selection = d3.select(this);
-
-            selection
-                .transition()
-                .delay("20")
-                .duration("200")
-                .attr("r", 3)
-                .style("opacity", 1);
-            
-            d3.selectAll(".tooltip").style("display","none")
-        });
-})
-
-    
-
+                selection
+                    .transition()
+                    .delay("20")
+                    .duration("200")
+                    .attr("r", 3)
+                    .style("opacity", 1);
+                
+                d3.selectAll(".tooltip").style("display","none")
+            }); 
 }
